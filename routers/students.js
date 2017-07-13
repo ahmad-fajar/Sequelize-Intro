@@ -45,5 +45,29 @@ router.get('/addstudent', (req, res) => {
   res.render('addstudent');
 });
 
+router.post('/addstudent', (req, res) => {
+  model.Student.create({
+    first_name : `${req.body.first_name}`,
+    last_name : `${req.body.last_name}`,
+    email : `${req.body.email}`,
+    cratedAt : new Date(),
+    updatedAt : new Date()
+  })
+  .then(() => {
+    res.redirect('/students');
+  });
+});
+
+// delete
+router.get('/delete/:id', (req, res) => {
+  model.Student.destroy({
+    where: {
+      id : `${req.params.id}`
+    }
+  })
+  .then(() => {
+    res.redirect('/students');
+  });
+});
 
 module.exports = router;
