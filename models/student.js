@@ -3,7 +3,15 @@ module.exports = function(sequelize, DataTypes) {
   var Student = sequelize.define('Student', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: {
+      type : DataTypes.STRING,
+      validate : {
+        isEmail : {
+          args : true,
+          msg : 'Invalid email address.'
+        }
+      }
+    }
   }, {
     classMethods: {
       associate: function(models) {
@@ -13,3 +21,4 @@ module.exports = function(sequelize, DataTypes) {
   });
   return Student;
 };
+

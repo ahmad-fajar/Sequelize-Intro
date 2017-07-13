@@ -55,7 +55,11 @@ router.post('/addstudent', (req, res) => {
   })
   .then(() => {
     res.redirect('/students');
-  });
+  })
+  .catch(err => {
+    console.log(err);
+    res.render('addstudent', {err : err});
+  })
 });
 
 // delete
