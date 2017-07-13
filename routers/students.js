@@ -4,11 +4,11 @@ const model = require('../models')
 
 
 router.get('/', (req, res) => {
-  model.Subject.findAll()
+  model.Student.findAll()
   .then(data => {
-    res.render('subjects', {data : data});
+    res.render('students', {data : data});
   });
 });
-  
+
 
 module.exports = router;

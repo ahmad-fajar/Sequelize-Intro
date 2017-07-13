@@ -10,13 +10,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // routing
-const index = require('./routers/index');
-const teachers = require('./routers/teachers')
-const subjects = require('./routers/subjects')
+const index    = require('./routers/index');
+const teachers = require('./routers/teachers');
+const students = require('./routers/students');
+const subjects = require('./routers/subjects');
 
 
 app.use('/', index);
 app.use('/teachers', teachers);
+app.use('/students', students);
 app.use('/subjects', subjects);
 
 
