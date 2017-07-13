@@ -1,0 +1,2 @@
+# sequelize-intro
+Sequelize Intro
