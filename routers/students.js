@@ -46,6 +46,10 @@ router.get('/addstudent', (req, res) => {
 });
 
 router.post('/addstudent', (req, res) => {
+  // karena isi req body (key / attribut-nya) sama jumlah dan namanya dengan table.
+  // kalo demikian, bisa dipendekin jadi
+  // model.Student.create(req.body)
+  // .then ...
   model.Student.create({
     first_name : `${req.body.first_name}`,
     last_name : `${req.body.last_name}`,
