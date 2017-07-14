@@ -6,17 +6,18 @@
   </head>
   <body>
 
-    <h2>Edit <%= data[0].first_name %> <%= data[0].last_name %>'s data.</h2>
+    <h2>Edit <%= data.first_name %> <%= data.last_name %>'s data.</h2>
     <br>
 
-    <form class="" action="/students/edit/<%= data[0].id %>" method="post">
-      <input type="text" name="first_name" value="<%= data[0].first_name %>">
+    <form class="" action="/students/edit/<%= data.id %>" method="post">
+      <input type="text" name="first_name" value="<%= data.first_name %>">
       <br>
-      <input type="text" name="last_name" value="<%= data[0].last_name %>">
+      <input type="text" name="last_name" value="<%= data.last_name %>">
       <br>
-      <input type="text" name="email" value="<%= data[0].email %>">
+      <input type="text" name="email" value="<%= data.email %>">
       <br>
       <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
 
     </form>
   </body>

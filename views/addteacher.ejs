@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Teacher</title>
+  </head>
+  <body>
+    <h2>Add new teacher.</h2>
+    <br>
+
+    <form class="" action="/teachers/addteacher" method="post">
+      <input type="text" name="first_name" placeholder="Teacher's First Name">
+      <br>
+      <input type="text" name="last_name" placeholder="Teacher's Last Name">
+      <br>
+      <input type="text" name="email" placeholder="Teacher's Email">
+      <br>
+
+      <select name="SubjectId">
+        <option>Choose subject</option>
+        <% subject_list.forEach(list => { %>
+          <option value="<%= list.id %>"><%= list.subject_name %></option>
+        <% }) %>
+      </select>
+      <br>
+
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+
+    </form>
+  </body>
+</html>

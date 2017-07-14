@@ -27,10 +27,8 @@
         <td><%= list.last_name %></td>
         <td><%= list.email %></td>
         <td>
-          <!-- <a href="/students/edit/<%= list.id %>">Edit</a>
-          <a href="/students/delete/<%= list.id %>">Delete</a> -->
-          <button href="/students/edit/<%= list.id %>" name="button">Edit</button>
-          <button href="/students/delete/<%= list.id %>" type="submit" onclick="return confirm('Are you sure want to delete <%= list.first_name %> <%= list.last_name %>')">Delete</button>
+          <a href="/students/edit/<%= list.id %>">Edit</a> |
+          <a href="/students/delete/<%= list.id %>" onclick="return confirm('Are you sure want to delete <%= list.first_name %> <%= list.last_name %>')">Delete</a>
         </td>
       </tr>
     <% }); %>

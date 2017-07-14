@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Teacher</title>
+  </head>
+  <body>
+
+    <h2>Edit <%= teacher_data.first_name %> <%= teacher_data.last_name %>'s data.</h2>
+    <br>
+
+    <form class="" action="/teachers/edit/<%= teacher_data.id %>" method="post">
+      <input type="text" name="first_name" value="<%= teacher_data.first_name %>">
+      <br>
+      <input type="text" name="last_name" value="<%= teacher_data.last_name %>">
+      <br>
+      <input type="text" name="email" value="<%= teacher_data.email %>">
+      <br>
+      <input type="text" value="<%= teacher_data.SubjectId %>">
+      <br>
+      <select class="" name="SubjectId">
+        <option value=""> Unassigned </option>
+        <% subject_data.forEach(subject => { %>
+          <option value="<%= subject.id %>"> <%= subject.subject_name %> </option>
+        <% }) %>
+      </select>
+      <br>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+
+    </form>
+  </body>
+</html>

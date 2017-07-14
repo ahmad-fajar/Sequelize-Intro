@@ -13,13 +13,8 @@ router.get('/', (req, res) => {
 
 // edit
 router.get('/edit/:id', (req, res) => {
-  model.Student.findAll({
-    where : {
-      id : req.params.id
-    }
-  })
+  model.Student.findById(req.params.id)
   .then(data => {
-    // console.log(data);
     res.render('editstudent', {data : data});
   });
 });
