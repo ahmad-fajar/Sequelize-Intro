@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 // edit
 router.get('/edit/:id', (req, res) => {
-  model.Teacher.findById(req.params.id)
+  model.Teacher.findById(req.params.id, {include : model.Subject})
   .then(teacher_data => {
     model.Subject.findAll()
     .then(subject_data => {

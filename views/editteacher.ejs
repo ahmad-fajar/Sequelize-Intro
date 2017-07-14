@@ -19,10 +19,19 @@
       <input type="text" value="<%= teacher_data.SubjectId %>">
       <br>
       <select class="" name="SubjectId">
-        <option value=""> Unassigned </option>
-        <% subject_data.forEach(subject => { %>
-          <option value="<%= subject.id %>"> <%= subject.subject_name %> </option>
-        <% }) %>
+        <% if (teacher_data.SubjectId == undefined) { %>
+          <option> Unassigned </option>
+          <% subject_data.forEach(subject => { %>
+            <option value="<%= subject.id %>"> <%= subject.subject_name %> </option>
+          <% }) %>
+        <% } else { %>
+          <option selected="<%= teacher_data.SubjectId %>"> <%= teacher_data.Subject.subject_name %> </option>
+          <% subject_data.forEach(subject2 => { %>
+            <option value="<%= subject2.id %>"> <%= subject2.subject_name %> </option>
+          <% }) %>
+        <% } %>
+
+
       </select>
       <br>
       <button type="submit">Submit</button>
