@@ -24,7 +24,7 @@
     </table>
 
     <form action="/students/addsubject/<%= student_data.id %>" method="post">
-      <select class="" name="SubjectsId">
+      <select class="" name="SubjectId">
         <option value="">Choose Subject</option>
         <% subject_list.forEach(list => { %>
           <option value="<%= list.id %>"><%= list.subject_name %></option>

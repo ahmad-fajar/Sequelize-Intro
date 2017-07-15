@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Enrolled Students</title>
+  </head>
+  <body>
+    <h2><%= subject_data.subject_name %></h2>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+
+    <% student_data.forEach(student => { %>
+      <tr>
+        <td><%= student.Student.first_name + ' ' + student.Student.last_name %></td>
+      <% if (!student.score) { %>
+        <td><a href="/subjects/<%= student.id %>/givescore">Give Score</a></td>
+      <% } else { %>
+        <td><%= student.score %></td>
+      <% } %>
+      </tr>
+    <% }) %>
+
+  </table>
+  </body>
+</html>

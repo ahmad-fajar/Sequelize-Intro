@@ -12,6 +12,7 @@
         <th>ID</th>
         <th>Subject</th>
         <th>Assigned Teacher</th>
+        <th>Actions</th>
       </tr>
 
     <% data.forEach(list => { %>
@@ -24,6 +25,9 @@
             <li><%= teacher.first_name + ' ' + teacher.last_name %></li>
             <% }) %>
           </ol>
+        </td>
+        <td>
+          <a href="/subjects/<%= list.id %>/enrolledstudents">Enrolled Students</a>
         </td>
       </tr>
     <% }); %>
