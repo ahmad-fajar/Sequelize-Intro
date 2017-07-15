@@ -10,19 +10,20 @@
 
     <table>
       <tr >
+        <td>First Name</td>
         <td><%=student_data.first_name%></td>
       </tr>
       <tr>
+        <td>Last Name</td>
         <td><%=student_data.last_name%></td>
       </tr>
       <tr>
+        <td>Email</td>
         <td><%=student_data.email%></td>
       </tr>
     </table>
 
-    <form action="/students/addsubject/:id" method="post">
-      <input type="hidden" readonly="readonly" value="<%=student_data.id%>" name="StudentsId">
-      <br>
+    <form action="/students/addsubject/<%= student_data.id %>" method="post">
       <select class="" name="SubjectsId">
         <option value="">Choose Subject</option>
         <% subject_list.forEach(list => { %>

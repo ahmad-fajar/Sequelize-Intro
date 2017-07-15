@@ -87,9 +87,8 @@ router.get('/addsubject/:id', (req, res) => {
 });
 
 router.post('/addsubject/:id', (req, res) => {
-  console.log(req.body);
   model.StudentSubject.create({
-    StudentsId : req.body.StudentsId,
+    StudentsId : req.params.id,
     SubjectsId : req.body.SubjectsId
   })
   .then(() => {
