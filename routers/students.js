@@ -56,7 +56,7 @@ router.post('/addstudent', (req, res) => {
     res.redirect('/students');
   })
   .catch(err => {
-    console.log(err);
+    // console.log(err);
     res.render('addstudent', {err : err});
   })
 });
@@ -75,10 +75,8 @@ router.get('/delete/:id', (req, res) => {
 
 // add subject to students
 router.get('/addsubject/:id', (req, res) => {
-  // res.send('aaa');
   model.Student.findById(req.params.id)
   .then(student_data => {
-    // console.log(data);
     model.Subject.findAll()
     .then(subject_list => {
       res.render('addstudentsubject', {student_data : student_data, subject_list : subject_list})
@@ -88,8 +86,8 @@ router.get('/addsubject/:id', (req, res) => {
 
 router.post('/addsubject/:id', (req, res) => {
   model.StudentSubject.create({
-    StudentsId : req.params.id,
-    SubjectsId : req.body.SubjectsId
+    StudentId : req.params.id,
+    SubjectId : req.body.SubjectId
   })
   .then(() => {
     res.redirect('/students')

@@ -17,7 +17,8 @@
       <tr>
         <td><%= student.Student.first_name + ' ' + student.Student.last_name %></td>
       <% if (!student.score) { %>
-        <td><a href="/subjects/<%= student.id %>/givescore">Give Score</a></td>
+        <!-- note: student.id == StudentId -->
+        <td><a href="/subjects/<%= subject_data.id %>/<%= student.id %>/givescore">Give Score</a></td>
       <% } else { %>
         <td><%= student.score %></td>
       <% } %>

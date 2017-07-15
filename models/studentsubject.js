@@ -1,8 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var StudentSubject = sequelize.define('StudentSubject', {
-    StudentsId: DataTypes.INTEGER,
-    SubjectsId: DataTypes.INTEGER
+    StudentId: DataTypes.INTEGER,
+    SubjectId: DataTypes.INTEGER,
+    score    : DataTypes.INTEGER
   });
 
   StudentSubject.associate = models => {

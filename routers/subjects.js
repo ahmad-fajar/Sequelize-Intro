@@ -13,4 +13,44 @@ router.get('/', (req, res) => {
 });
 
 
+// enrolled students
+router.get('/:id/enrolledstudents', (req, res) => {
+  model.Subject.findById(req.params.id)
+  .then(subject_data => {
+    model.StudentSubject.findAll({
+      where : {
+        SubjectId : req.params.id
+      },
+      include : [model.Student]
+    })
+    .then(student_data => {
+      res.render('enrolledstudents', {subject_data : subject_data, student_data : student_data})
+    })
+  })
+})
+
+// addscores
+router.get('/:sbj_id/:conj_id/givescore', (req, res) => {
+  model.StudentSubject.findById(req.params.conj_id, {
+    include : [model.Student, model.Subject]
+  })
+  .then(data => {
+    console.log(data);
+    res.render('givescore', {data : data})
+  })
+})
+
+router.post('/:sbj_id/:conj_id/givescore', (req, res) => {
+  model.StudentSubject.update({
+    score : req.body.score
+  }, {
+    where : {
+      id : req.params.conj_id
+    }
+  })
+  .then(() => {
+    res.redirect(`/subjects/${req.params.sbj_id}/enrolledstudents`)
+  })
+})
+
 module.exports = router;
