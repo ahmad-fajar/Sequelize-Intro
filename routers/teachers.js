@@ -52,14 +52,7 @@ router.get('/addteacher', (req, res) => {
 });
 
 router.post('/addteacher', (req, res) => {
-  model.Teacher.create({
-    first_name : `${req.body.first_name}`,
-    last_name : `${req.body.last_name}`,
-    email : `${req.body.email}`,
-    SubjectId : `${req.body.SubjectId}`,
-    cratedAt : new Date(),
-    updatedAt : new Date()
-  })
+  model.Teacher.create(req.body)
   .then(() => {
     res.redirect('/teachers');
   })

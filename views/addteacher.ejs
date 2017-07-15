@@ -17,13 +17,12 @@
       <br>
 
       <select name="SubjectId">
-        <option>Choose subject</option>
+        <option value="">Choose subject</option>
         <% subject_list.forEach(list => { %>
           <option value="<%= list.id %>"><%= list.subject_name %></option>
         <% }) %>
       </select>
       <br>
-
 
       <button type="submit">Submit</button>
       <button type="reset">Reset</button>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Subject</title>
+  </head>
+  <body>
+
+    <h2>Add subject to student</h2>
+
+    <table>
+      <tr >
+        <td><%=student_data.first_name%></td>
+      </tr>
+      <tr>
+        <td><%=student_data.last_name%></td>
+      </tr>
+      <tr>
+        <td><%=student_data.email%></td>
+      </tr>
+    </table>
+
+    <form action="/students/addsubject/:id" method="post">
+      <input type="hidden" readonly="readonly" value="<%=student_data.id%>" name="StudentsId">
+      <br>
+      <select class="" name="SubjectsId">
+        <option value="">Choose Subject</option>
+        <% subject_list.forEach(list => { %>
+          <option value="<%= list.id %>"><%= list.subject_name %></option>
+        <% }) %>
+      </select>
+      <br>
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+
+    </form>
+
+  </body>
+</html>

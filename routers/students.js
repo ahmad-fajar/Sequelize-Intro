@@ -5,13 +5,13 @@ const model = require('../models')
 
 router.get('/', (req, res) => {
   model.Student.findAll()
-  .then(data => {
-    res.render('students', {data : data});
+  .then(student_data => {
+    res.render('students', {student_data : student_data});
   });
 });
 
 
-// edit
+// edit student
 router.get('/edit/:id', (req, res) => {
   model.Student.findById(req.params.id)
   .then(data => {
@@ -35,7 +35,7 @@ router.post('/edit/:id', (req, res) => {
 });
 
 
-// add
+// add student
 router.get('/addstudent', (req, res) => {
   res.render('addstudent');
 });
@@ -61,7 +61,7 @@ router.post('/addstudent', (req, res) => {
   })
 });
 
-// delete
+// delete student
 router.get('/delete/:id', (req, res) => {
   model.Student.destroy({
     where: {
@@ -72,5 +72,29 @@ router.get('/delete/:id', (req, res) => {
     res.redirect('/students');
   });
 });
+
+// add subject to students
+router.get('/addsubject/:id', (req, res) => {
+  // res.send('aaa');
+  model.Student.findById(req.params.id)
+  .then(student_data => {
+    // console.log(data);
+    model.Subject.findAll()
+    .then(subject_list => {
+      res.render('addstudentsubject', {student_data : student_data, subject_list : subject_list})
+    });
+  });
+});
+
+router.post('/addsubject/:id', (req, res) => {
+  console.log(req.body);
+  model.StudentSubject.create({
+    StudentsId : req.body.StudentsId,
+    SubjectsId : req.body.SubjectsId
+  })
+  .then(() => {
+    res.redirect('/students')
+  })
+})
 
 module.exports = router;
