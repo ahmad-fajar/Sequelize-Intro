@@ -5,7 +5,8 @@ const model = require('../models')
 
 router.get('/', (req, res) => {
   model.Teacher.findAll({
-    include : [model.Subject]
+    include : [model.Subject],
+    order : [['first_name', 'ASC']]
   })
   .then(data => {
     console.log(data);

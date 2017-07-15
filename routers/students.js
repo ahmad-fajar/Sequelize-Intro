@@ -4,7 +4,9 @@ const model = require('../models')
 
 
 router.get('/', (req, res) => {
-  model.Student.findAll()
+  model.Student.findAll({
+    order : [['first_name', 'ASC']]
+  })
   .then(student_data => {
     res.render('students', {student_data : student_data});
   });

@@ -5,7 +5,8 @@ const model = require('../models')
 
 router.get('/', (req, res) => {
   model.Subject.findAll({
-    include : [model.Teacher]
+    include : [model.Teacher],
+    order : [['subject_name', 'ASC']]
   })
   .then(data => {
     res.render('subjects', {data : data});
@@ -21,13 +22,15 @@ router.get('/:id/enrolledstudents', (req, res) => {
       where : {
         SubjectId : req.params.id
       },
-      include : [model.Student]
-    })
+      include : [model.Student],
+      order : [['Student', 'first_name', 'ASC']]
+    },)
     .then(student_data => {
       res.render('enrolledstudents', {subject_data : subject_data, student_data : student_data})
     })
   })
 })
+
 
 // addscores
 router.get('/:sbj_id/:conj_id/givescore', (req, res) => {

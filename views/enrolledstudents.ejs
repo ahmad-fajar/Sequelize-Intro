@@ -9,12 +9,15 @@
 
   <table>
     <tr>
+      <td>No.</td>
       <th>Name</th>
       <th>Score</th>
     </tr>
 
+    <% var i = 1 %>
     <% student_data.forEach(student => { %>
       <tr>
+        <td><%= i++ %></td>
         <td><%= student.Student.first_name + ' ' + student.Student.last_name %></td>
       <% if (!student.score) { %>
         <!-- note: student.id == StudentId -->
