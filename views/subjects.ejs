@@ -11,12 +11,20 @@
       <tr>
         <th>ID</th>
         <th>Subject</th>
+        <th>Assigned Teacher</th>
       </tr>
 
     <% data.forEach(list => { %>
       <tr>
         <td><%= list.id %></td>
         <td><%= list.subject_name %></td>
+        <td>
+          <ol>
+            <% list.Teachers.forEach(teacher => { %>
+            <li><%= teacher.first_name + ' ' + teacher.last_name %></li>
+            <% }) %>
+          </ol>
+        </td>
       </tr>
     <% }); %>
 

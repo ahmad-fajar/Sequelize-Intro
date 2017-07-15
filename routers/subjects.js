@@ -4,11 +4,13 @@ const model = require('../models')
 
 
 router.get('/', (req, res) => {
-  model.Subject.findAll()
+  model.Subject.findAll({
+    include : [model.Teacher]
+  })
   .then(data => {
     res.render('subjects', {data : data});
   });
 });
-  
+
 
 module.exports = router;
