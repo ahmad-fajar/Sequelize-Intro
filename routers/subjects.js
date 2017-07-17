@@ -4,6 +4,18 @@ const model = require('../models');
 const letterScore = require('../helpers/letterscore.js');
 
 
+router.use((req,res, next)=>{
+  // console.log(req.session.role);
+  if (req.session.role == undefined) {
+    res.redirect('/login');
+  } else if (req.session.role == 'Academic' || req.session.role == 'Headmaster') {
+    next();
+  } else {
+    res.send('Insufficient access')
+  }
+})
+
+
 router.get('/', (req, res) => {
   model.Subject.findAll({
     include : [model.Teacher],
@@ -12,7 +24,8 @@ router.get('/', (req, res) => {
   .then(data => {
     res.render('subjects', {
       pagetitle : 'Subjects',
-      data : data
+      data : data,
+      currentUser : req.session.user || null
     });
   });
 });
@@ -33,7 +46,8 @@ router.get('/:id/enrolledstudents', (req, res) => {
       res.render('enrolledstudents', {
         pagetitle : 'Enrolled Students',
         subject_data : subject_data,
-        student_data : letterScore(student_data)
+        student_data : letterScore(student_data),
+        currentUser : req.session.user || null
       });
     });
   });
@@ -49,7 +63,8 @@ router.get('/:sbj_id/:conj_id/givescore', (req, res) => {
     // console.log(data);
     res.render('givescore', {
       pagetitle : 'Add Score',
-      data : data
+      data : data,
+      currentUser : req.session.user || null
     });
   });
 });

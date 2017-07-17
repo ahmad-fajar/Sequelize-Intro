@@ -2,6 +2,17 @@
 const router = require('express').Router();
 const model = require('../models')
 
+router.use((req,res, next)=>{
+  // console.log(req.session.role);
+  if (req.session.role == undefined) {
+    res.redirect('/login');
+  } else if (req.session.role == 'Headmaster') {
+    next();
+  } else {
+    res.send('Insufficient access')
+  }
+})
+
 
 router.get('/', (req, res) => {
   model.Teacher.findAll({
@@ -12,7 +23,8 @@ router.get('/', (req, res) => {
     // console.log(data);
     res.render('teachers', {
       pagetitle : 'Teachers',
-      data : data
+      data : data,
+      currentUser : req.session.user || null
     });
   });
 });  // --> belum selesai buat ambil data subject
@@ -28,7 +40,8 @@ router.get('/edit/:id', (req, res) => {
       res.render('editteacher', {
         pagetitle : 'Edit Teacher\'s Data',
         teacher_data : teacher_data,
-        subject_data : subject_data
+        subject_data : subject_data,
+        currentUser : req.session.user || null
       });
     })
   });
@@ -57,7 +70,8 @@ router.get('/addteacher', (req, res) => {
   .then(data => {
     res.render('addteacher', {
       pagetitle : 'Add Teacher',
-      subject_list: data
+      subject_list: data,
+      currentUser : req.session.user || null
     });
   })
 });
@@ -76,7 +90,7 @@ router.post('/addteacher', (req, res) => {
 router.get('/delete/:id', (req, res) => {
   model.Teacher.destroy({
     where: {
-      id : `${req.params.id}`
+      id : req.params.id
     }
   })
   .then(() => {

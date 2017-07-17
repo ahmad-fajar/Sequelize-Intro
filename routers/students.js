@@ -3,6 +3,17 @@ const router = require('express').Router();
 const model = require('../models')
 
 
+router.use((req,res, next)=>{
+  // console.log(req.session.role);
+  if (req.session.role == undefined) {
+    res.redirect('/login');
+  } else if (req.session.role == 'Academic' || req.session.role == 'Headmaster' || req.session.role == 'Teacher') {
+    next();
+  } else {
+    res.send('Insufficient access')
+  }
+})
+
 router.get('/', (req, res) => {
   model.Student.findAll({
     order : [['first_name', 'ASC']],
@@ -10,7 +21,8 @@ router.get('/', (req, res) => {
   .then(student_data => {
     res.render('students', {
       pagetitle : 'Students',
-      student_data : student_data
+      student_data : student_data,
+      currentUser : req.session.user || null
     });
   });
 });
@@ -22,7 +34,8 @@ router.get('/edit/:id', (req, res) => {
   .then(data => {
     res.render('editstudent', {
       pagetitle : 'Edit Students',
-      data : data
+      data : data,
+
     });
   });
 });
@@ -45,7 +58,10 @@ router.post('/edit/:id', (req, res) => {
 
 // add student
 router.get('/addstudent', (req, res) => {
-  res.render('addstudent', {pagetitle : 'Add Student'});
+  res.render('addstudent', {
+    pagetitle : 'Add Student',
+    currentUser : req.session.user || null
+  });
 });
 
 router.post('/addstudent', (req, res) => {
@@ -90,7 +106,8 @@ router.get('/addsubject/:id', (req, res) => {
       res.render('addstudentsubject', {
         pagetitle : 'Add Subject to Student',
         student_data : student_data,
-        subject_list : subject_list
+        subject_list : subject_list,
+        currentUser : req.session.user || null
       });
     });
   });

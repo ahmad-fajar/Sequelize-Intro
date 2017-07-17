@@ -4,14 +4,16 @@ const model = require('../models')
 
 
 router.get('/', (req, res, next) => {
-  // console.log(req.session);
-  let currentUser = req.session.user || null
+  console.log(req.session);
+  // let currentUser = {user : req.session.user || null, role : req.session.role}
   res.render('index', {pagetitle : 'Home', currentUser : req.session.user || null});
 });
 
 router.get('/login', (req, res, next) => {
-  let currentUser = req.session.user || null
-  res.render('login', {pagetitle : 'Login', currentUser : currentUser})
+  res.render('login', {
+    pagetitle : 'Login',
+    currentUser : req.session.user || null
+  })
 })
 
 router.post('/login', (req, res, next) => {
@@ -22,13 +24,14 @@ router.post('/login', (req, res, next) => {
       req.session.role = data.role;
       res.redirect('/')
     } else {
-      res.send('password salah')
+      // res.send('Wrong username or password')
+      res.redirect('/login')
     }
   })
 })
 
 router.get('/logout', (req, res, next) => {
-  req.session.destroy(err => {
+  req.session.destroy(() => {
     res.redirect('/')
   })
   // res.send('logged out')

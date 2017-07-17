@@ -27,6 +27,11 @@ const students = require('./routers/students');
 const subjects = require('./routers/subjects');
 
 
+// app.use((req, res, next) => {
+//   if (req.session.user) next();
+//   else res.redirect('/login', {msg : 'You have to login first'})
+// })
+
 app.use('/', index);
 app.use('/teachers', teachers);
 app.use('/students', students);
