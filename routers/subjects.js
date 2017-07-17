@@ -38,7 +38,7 @@ router.get('/:sbj_id/:conj_id/givescore', (req, res) => {
     include : [model.Student, model.Subject]
   })
   .then(data => {
-    console.log(data);
+    // console.log(data);
     res.render('givescore', {data : data})
   })
 })

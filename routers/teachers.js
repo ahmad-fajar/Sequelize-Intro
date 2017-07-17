@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     order : [['first_name', 'ASC']]
   })
   .then(data => {
-    console.log(data);
+    // console.log(data);
     res.render('teachers', {data : data});
   });
 });  // --> belum selesai buat ambil data subject
@@ -21,7 +21,7 @@ router.get('/edit/:id', (req, res) => {
   .then(teacher_data => {
     model.Subject.findAll()
     .then(subject_data => {
-      console.log(subject_data[0].id);
+      // console.log(subject_data[0].id);
       res.render('editteacher', {teacher_data : teacher_data, subject_data : subject_data});
     })
   });
