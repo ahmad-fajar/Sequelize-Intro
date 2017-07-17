@@ -1,6 +1,7 @@
 'use strict'
 const router = require('express').Router();
 const model = require('../models')
+const letterScore = require('../helpers/letterscore.js')
 
 
 router.get('/', (req, res) => {
@@ -9,7 +10,10 @@ router.get('/', (req, res) => {
     order : [['subject_name', 'ASC']]
   })
   .then(data => {
-    res.render('subjects', {data : data});
+    res.render('subjects', {
+      pagetitle : 'Subjects',
+      data : data
+    });
   });
 });
 
@@ -26,10 +30,14 @@ router.get('/:id/enrolledstudents', (req, res) => {
       order : [['Student', 'first_name', 'ASC']]
     })
     .then(student_data => {
-      res.render('enrolledstudents', {subject_data : subject_data, student_data : student_data})
-    })
-  })
-})
+      res.render('enrolledstudents', {
+        pagetitle : 'Enrolled Students',
+        subject_data : subject_data,
+        student_data : letterScore(student_data)
+      });
+    });
+  });
+});
 
 
 // addscores
@@ -39,9 +47,12 @@ router.get('/:sbj_id/:conj_id/givescore', (req, res) => {
   })
   .then(data => {
     // console.log(data);
-    res.render('givescore', {data : data})
-  })
-})
+    res.render('givescore', {
+      pagetitle : 'Add Score',
+      data : data
+    });
+  });
+});
 
 router.post('/:sbj_id/:conj_id/givescore', (req, res) => {
   model.StudentSubject.update({
@@ -53,7 +64,7 @@ router.post('/:sbj_id/:conj_id/givescore', (req, res) => {
   })
   .then(() => {
     res.redirect(`/subjects/${req.params.sbj_id}/enrolledstudents`)
-  })
-})
+  });
+});
 
 module.exports = router;

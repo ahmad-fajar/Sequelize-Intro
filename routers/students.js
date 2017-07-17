@@ -5,10 +5,13 @@ const model = require('../models')
 
 router.get('/', (req, res) => {
   model.Student.findAll({
-    order : [['first_name', 'ASC']]
+    order : [['first_name', 'ASC']],
   })
   .then(student_data => {
-    res.render('students', {student_data : student_data});
+    res.render('students', {
+      pagetitle : 'Students',
+      student_data : student_data
+    });
   });
 });
 
@@ -17,7 +20,10 @@ router.get('/', (req, res) => {
 router.get('/edit/:id', (req, res) => {
   model.Student.findById(req.params.id)
   .then(data => {
-    res.render('editstudent', {data : data});
+    res.render('editstudent', {
+      pagetitle : 'Edit Students',
+      data : data
+    });
   });
 });
 
@@ -39,7 +45,7 @@ router.post('/edit/:id', (req, res) => {
 
 // add student
 router.get('/addstudent', (req, res) => {
-  res.render('addstudent');
+  res.render('addstudent', {pagetitle : 'Add Student'});
 });
 
 router.post('/addstudent', (req, res) => {
@@ -81,7 +87,11 @@ router.get('/addsubject/:id', (req, res) => {
   .then(student_data => {
     model.Subject.findAll()
     .then(subject_list => {
-      res.render('addstudentsubject', {student_data : student_data, subject_list : subject_list})
+      res.render('addstudentsubject', {
+        pagetitle : 'Add Subject to Student',
+        student_data : student_data,
+        subject_list : subject_list
+      });
     });
   });
 });

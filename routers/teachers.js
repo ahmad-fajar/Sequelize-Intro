@@ -10,7 +10,10 @@ router.get('/', (req, res) => {
   })
   .then(data => {
     // console.log(data);
-    res.render('teachers', {data : data});
+    res.render('teachers', {
+      pagetitle : 'Teachers',
+      data : data
+    });
   });
 });  // --> belum selesai buat ambil data subject
 
@@ -22,7 +25,11 @@ router.get('/edit/:id', (req, res) => {
     model.Subject.findAll()
     .then(subject_data => {
       // console.log(subject_data[0].id);
-      res.render('editteacher', {teacher_data : teacher_data, subject_data : subject_data});
+      res.render('editteacher', {
+        pagetitle : 'Edit Teacher\'s Data',
+        teacher_data : teacher_data,
+        subject_data : subject_data
+      });
     })
   });
 });
@@ -48,7 +55,10 @@ router.post('/edit/:id', (req, res) => {
 router.get('/addteacher', (req, res) => {
   model.Subject.findAll()
   .then(data => {
-    res.render('addteacher', {subject_list: data});
+    res.render('addteacher', {
+      pagetitle : 'Add Teacher',
+      subject_list: data
+    });
   })
 });
 
