@@ -1,7 +1,7 @@
 'use strict'
 const router = require('express').Router();
-const model = require('../models')
-const letterScore = require('../helpers/letterscore.js')
+const model = require('../models');
+const letterScore = require('../helpers/letterscore.js');
 
 
 router.get('/', (req, res) => {
