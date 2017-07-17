@@ -10,32 +10,36 @@
 
     <h2><%= subject_data.subject_name %></h2>
 
-  <table>
-    <tr>
-      <td>No.</td>
-      <th>Name</th>
-      <th>Score</th>
-      <th>Letter Score</th>
-    </tr>
+  <div class="container">
+      <div class="row col-md-6 col-md-offset-2 custyle">
+      <table class="table table-striped custab">
+      <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th class="text-center">Score</th>
+            <th class="text-center">Letter Score</th>
+          </tr>
+      </thead>
+      <% var i = 1 %>
+      <% student_data.forEach(student => { %>
+        <tr>
+          <td><%= i++ %></td>
+          <td><%= student.Student.first_name + ' ' + student.Student.last_name %></td>
+        <% if (!student.score) { %>
+          <!-- note: student.id == StudentId -->
+          <td class="text-center"><a href="/subjects/<%= subject_data.id %>/<%= student.id %>/givescore">Give Score</a></td>
+          <td class="text-center"><%= student.letter %></td>
+        <% } else { %>
+          <td class="text-center"><%= student.score %></td>
+          <td class="text-center"><%= student.letter %></td>
+        <% } %>
+        </tr>
+      <% }) %>
 
-    <% var i = 1 %>
-    <% student_data.forEach(student => { %>
-      <tr>
-        <td><%= i++ %></td>
-        <td><%= student.Student.first_name + ' ' + student.Student.last_name %></td>
-      <% if (!student.score) { %>
-        <!-- note: student.id == StudentId -->
-        <td><a href="/subjects/<%= subject_data.id %>/<%= student.id %>/givescore">Give Score</a></td>
-        <td><%= student.letter %></td>
-      <% } else { %>
-        <td><%= student.score %></td>
-        <td><%= student.letter %></td>
-      <% } %>
-      </tr>
-    <% }) %>
-
-  </table>
-
+      </table>
+      </div>
+  </div>
 
   </body>
 </html>

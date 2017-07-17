@@ -38,5 +38,41 @@
 
     </table>
 
+    <div class="container">
+        <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Assigned Teacher</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <% var i = 1 %>
+        <% data.forEach(list => { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= list.subject_name %></td>
+            <td>
+              <ol>
+                <% list.Teachers.forEach(teacher => { %>
+                <li><%= teacher.first_name + ' ' + teacher.last_name %></li>
+                <% }) %>
+              </ol>
+            </td>
+
+            <td class="text-center"><a href="/subjects/<%= list.id %>/enrolledstudents" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-th-list"></span> Enrolled Students</a></td>
+          </tr>
+        <% }); %>
+
+        </table>
+        </div>
+    </div>
+
+
+
+
   </body>
 </html>
