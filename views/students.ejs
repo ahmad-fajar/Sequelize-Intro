@@ -10,36 +10,42 @@
 
     <h1>Students</h1>
 
-    <a href="/students/addstudent">Add New Student</a>
-    <br>
     <br>
 
-    <table>
-      <tr>
-        <th>No.</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Actions</th>
-        <th>Options</th>
-      </tr>
+    <div class="container">
+      <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
 
-    <% var i = 1 %>
-    <% student_data.forEach(list => { %>
-      <tr>
-        <td><%= i++ %></td>
-        <td><%= list.first_name %></td>
-        <td><%= list.last_name %></td>
-        <td><%= list.email %></td>
-        <td><a href="/students/addsubject/<%= list.id %>">Add Subject</a></td>
-        <td>
-          <a href="/students/edit/<%= list.id %>">Edit</a> |
-          <a href="/students/delete/<%= list.id %>" onclick="return confirm('Are you sure want to delete <%= list.first_name %> <%= list.last_name %>')">Delete</a>
-        </td>
-      </tr>
-    <% }); %>
+        <thead>
+        <a href="/students/addstudent" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new student</a>
+            <tr>
+                <th>No.</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th class="text-center">Action</th>
+                <th class="text-center">Options</th>
+            </tr>
+        </thead>
 
-    </table>
+        <% var i = 1 %>
+        <% student_data.forEach(list => { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= list.first_name %></td>
+            <td><%= list.last_name %></td>
+            <td><%= list.email %></td>
+            <!-- <td><a href="/students/addsubject/<%= list.id %>">Add Subject</a></td> -->
+            <td><a class='btn btn-info btn-xs' href=href="/students/addsubject/<%= list.id %>"><span class="glyphicon glyphicon-plus"></span> Subject</a></td>
+            <td class="text-center" style="block:inline;">
+              <a class='btn btn-info btn-xs' href="/students/edit/<%= list.id %>"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="/students/delete/<%= list.id %>" onclick="return confirm('Are you sure want to delete <%= list.first_name %> <%= list.last_name %>')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
+            </td>
+          </tr>
+        <% }); %>
+        </table>
+
+      </div>
+
 
   </body>
 </html>

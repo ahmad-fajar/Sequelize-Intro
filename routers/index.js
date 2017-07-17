@@ -6,13 +6,13 @@ const model = require('../models')
 router.get('/', (req, res, next) => {
   console.log(req.session);
   // let currentUser = {user : req.session.user || null, role : req.session.role}
-  res.render('index', {pagetitle : 'Home', currentUser : req.session.user || null});
+  res.render('index', {pagetitle : 'Home', currentUser : {user : req.session.user || null, role : req.session.role || null}});
 });
 
 router.get('/login', (req, res, next) => {
   res.render('login', {
     pagetitle : 'Login',
-    currentUser : req.session.user || null
+    currentUser : {user : req.session.user || null, role : req.session.role || null}
   })
 })
 

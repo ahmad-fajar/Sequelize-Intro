@@ -11,21 +11,32 @@
         <span class="icon-bar"></span>
       </button>
       <!-- <a class="navbar-brand" href="#">Logo</a> -->
-      <img href="/" id="logo" src="images/abstergo.png" width="55px" />
+      <a href="/"><img id="logo" src="images/abstergo.png" width="55px" /></a>
+    </div>
+    <div class="navbar-header" style="vertical-align: bottom;">
+      <a><%= currentUser.role %></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
+        <!-- <li class="active"><a><%= currentUser.role %> <span class="sr-only">(current)</span></a></li> -->
 
         <li><a href="/">Home</a></li>
 
-        <li><a href="/subjects"> Subject</a></li>
-        <li><a href="/students"> Student</a></li>
-        <li><a href="/teachers"> Teacher </a></li>
+        <% if (currentUser.role == 'Headmaster') { %>
+          <li><a href="/subjects"> Subject</a></li>
+          <li><a href="/students"> Student</a></li>
+          <li><a href="/teachers"> Teacher </a></li>
+        <% } else if (currentUser.role == 'Academic') { %>
+          <li><a href="/subjects"> Subject</a></li>
+          <li><a href="/students"> Student</a></li>
+        <% } else if (currentUser.role == 'Teacher') { %>
+          <li><a href="/students"> Student</a></li>
+        <% } %>
 
-        <% if (!currentUser) { %>
+        <% if (!currentUser.user) { %>
           <li class="active"><a href="/login">Login <span class="sr-only">(current)</span></a></li>
         <% } else { %>
           <li class="active"><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>

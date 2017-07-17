@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     res.render('subjects', {
       pagetitle : 'Subjects',
       data : data,
-      currentUser : req.session.user || null
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
     });
   });
 });
@@ -47,7 +47,7 @@ router.get('/:id/enrolledstudents', (req, res) => {
         pagetitle : 'Enrolled Students',
         subject_data : subject_data,
         student_data : letterScore(student_data),
-        currentUser : req.session.user || null
+        currentUser : {user : req.session.user || null, role : req.session.role || null}
       });
     });
   });
@@ -64,7 +64,7 @@ router.get('/:sbj_id/:conj_id/givescore', (req, res) => {
     res.render('givescore', {
       pagetitle : 'Add Score',
       data : data,
-      currentUser : req.session.user || null
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
     });
   });
 });

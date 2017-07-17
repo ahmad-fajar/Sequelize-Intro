@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
     res.render('students', {
       pagetitle : 'Students',
       student_data : student_data,
-      currentUser : req.session.user || null
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
     });
   });
 });
@@ -60,7 +60,7 @@ router.post('/edit/:id', (req, res) => {
 router.get('/addstudent', (req, res) => {
   res.render('addstudent', {
     pagetitle : 'Add Student',
-    currentUser : req.session.user || null
+    currentUser : {user : req.session.user || null, role : req.session.role || null}
   });
 });
 
@@ -107,7 +107,7 @@ router.get('/addsubject/:id', (req, res) => {
         pagetitle : 'Add Subject to Student',
         student_data : student_data,
         subject_list : subject_list,
-        currentUser : req.session.user || null
+        currentUser : {user : req.session.user || null, role : req.session.role || null}
       });
     });
   });

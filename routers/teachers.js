@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     res.render('teachers', {
       pagetitle : 'Teachers',
       data : data,
-      currentUser : req.session.user || null
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
     });
   });
 });  // --> belum selesai buat ambil data subject
@@ -41,7 +41,7 @@ router.get('/edit/:id', (req, res) => {
         pagetitle : 'Edit Teacher\'s Data',
         teacher_data : teacher_data,
         subject_data : subject_data,
-        currentUser : req.session.user || null
+        currentUser : {user : req.session.user || null, role : req.session.role || null}
       });
     })
   });
@@ -71,7 +71,7 @@ router.get('/addteacher', (req, res) => {
     res.render('addteacher', {
       pagetitle : 'Add Teacher',
       subject_list: data,
-      currentUser : req.session.user || null
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
     });
   })
 });
