@@ -12,4 +12,4 @@ let crypt = (pass, salt) => {
 // console.log(crypt('pass123', 'garam'));
 
 
-// module.exports = crypt;
+module.exports = crypt;

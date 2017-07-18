@@ -11,13 +11,10 @@ module.exports = function(sequelize, DataTypes) {
     role: DataTypes.STRING
   }, {
     hooks : {
-      beforeCreate : model => {
-        let salt = keygen();
-        return crypt(user.password, salt)
-        .then(data => {
-          user.password = data;
-          user.salt = salt;
-        })
+      beforeCreate : user => {
+        let salt = keygen()
+        user.password = crypt(user.password, salt)
+        user.salt = salt
       }
     }
   });

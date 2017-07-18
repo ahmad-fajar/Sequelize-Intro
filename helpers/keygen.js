@@ -14,5 +14,5 @@ let keygen = () => {
 };
 
 module.exports = keygen;
-console.log(keygen());
+// console.log(keygen());
 // console.log(Math.floor(Math.random()*10));
