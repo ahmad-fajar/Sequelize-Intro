@@ -10,43 +10,15 @@
 
     <h1>Subjects</h1>
 
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Subject</th>
-        <th>Assigned Teacher</th>
-        <th>Actions</th>
-      </tr>
-
-    <% var i = 1 %>
-    <% data.forEach(list => { %>
-      <tr>
-        <td><%= i++ %></td>
-        <td><%= list.subject_name %></td>
-        <td>
-          <ol>
-            <% list.Teachers.forEach(teacher => { %>
-            <li><%= teacher.first_name + ' ' + teacher.last_name %></li>
-            <% }) %>
-          </ol>
-        </td>
-        <td>
-          <a href="/subjects/<%= list.id %>/enrolledstudents">Enrolled Students</a>
-        </td>
-      </tr>
-    <% }); %>
-
-    </table>
-
     <div class="container">
         <div class="row col-md-6 col-md-offset-2 custyle">
         <table class="table table-striped custab">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>No.</th>
             <th>Subject</th>
-            <th>Assigned Teacher</th>
-            <th>Actions</th>
+            <th class="text-center">Assigned Teacher</th>
+            <th class="text-center">Actions</th>
           </tr>
         </thead>
 

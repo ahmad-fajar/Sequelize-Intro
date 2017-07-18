@@ -35,7 +35,7 @@ router.get('/edit/:id', (req, res) => {
     res.render('editstudent', {
       pagetitle : 'Edit Students',
       data : data,
-
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
     });
   });
 });
