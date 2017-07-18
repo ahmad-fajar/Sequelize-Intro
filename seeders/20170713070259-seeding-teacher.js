@@ -37,6 +37,18 @@ module.exports = {
         email: 'yuliusprawiranegara@sekolah.id',
         createdAt: new Date(),
         updatedAt: new Date()
+        }, {
+        first_name: 'New',
+        last_name: 'Teacher',
+        email: 'new.teacher@sekolah.id',
+        createdAt: new Date(),
+        updatedAt: new Date()
+        }, {
+        first_name: 'Guru',
+        last_name: 'Baru',
+        email: 'gurubaru@sekolah.id',
+        createdAt: new Date(),
+        updatedAt: new Date()
         }
       ], {});
   },

@@ -13,6 +13,10 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Teachers', [{
+      SubjectId : 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       SubjectId : 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -21,11 +25,15 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
-      SubjectId : 1,
+      SubjectId : 3,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
-      SubjectId : 1,
+      SubjectId : 4,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      SubjectId : 4,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {})
