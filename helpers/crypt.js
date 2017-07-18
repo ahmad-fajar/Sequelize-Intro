@@ -9,7 +9,7 @@ let crypt = (pass, salt) => {
   return crypted;
 };
 
-// console.log(crypt('pass123', 'garam'));
+// console.log(crypt('abc', 'f74779iT'));
 
 
 module.exports = crypt;

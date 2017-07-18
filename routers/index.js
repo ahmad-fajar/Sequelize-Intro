@@ -1,6 +1,7 @@
 'use strict'
 const router = require('express').Router();
 const model = require('../models')
+const crypt = require('../helpers/crypt.js')
 
 
 router.get('/', (req, res, next) => {
@@ -19,7 +20,9 @@ router.get('/login', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   model.User.findOne({ where : { username : req.body.username } })
   .then(data => {
-    if (data && data.password === req.body.password) {
+    let pass = crypt(req.body.password, data.salt)
+    console.log(pass);
+    if (data.password === req.body.password || pass === data.password) {
       req.session.user = data.username;
       req.session.role = data.role;
       res.redirect('/')
