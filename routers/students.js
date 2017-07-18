@@ -80,7 +80,6 @@ router.post('/addstudent', (req, res) => {
     res.redirect('/students');
   })
   .catch(err => {
-    // console.log(err);
     res.render('addstudent', {err : err});
   })
 });
@@ -89,11 +88,18 @@ router.post('/addstudent', (req, res) => {
 router.get('/delete/:id', (req, res) => {
   model.Student.destroy({
     where: {
-      id : `${req.params.id}`
+      id : req.params.id
     }
   })
   .then(() => {
-    res.redirect('/students');
+    model.StudentSubject.destroy({
+      where : {
+        StudentId : req.params.id
+      }
+    })
+    .then(() => {
+      res.redirect('/students');
+    });
   });
 });
 

@@ -38,6 +38,10 @@ router.get('/logout', (req, res, next) => {
 })
 
 
+router.get('/signup', (req, res, next) => {
+  res.render('signup', {pagetitle : 'Home', currentUser : {user : req.session.user || null, role : req.session.role || null}});
+})
+
 module.exports = router;
 
 
