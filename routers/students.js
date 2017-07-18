@@ -3,24 +3,40 @@ const router = require('express').Router();
 const model = require('../models')
 
 
+router.use((req,res, next)=>{
+  // console.log(req.session.role);
+  if (req.session.role == undefined) {
+    res.redirect('/login');
+  } else if (req.session.role == 'Academic' || req.session.role == 'Headmaster' || req.session.role == 'Teacher') {
+    next();
+  } else {
+    res.send('Insufficient access')
+  }
+})
+
 router.get('/', (req, res) => {
-  model.Student.findAll()
-  .then(data => {
-    res.render('students', {data : data});
+  model.Student.findAll({
+    order : [['first_name', 'ASC']],
+  })
+  .then(student_data => {
+    res.render('students', {
+      pagetitle : 'Students',
+      student_data : student_data,
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
+    });
   });
 });
 
 
-// edit
+// edit student
 router.get('/edit/:id', (req, res) => {
-  model.Student.findAll({
-    where : {
-      id : req.params.id
-    }
-  })
+  model.Student.findById(req.params.id)
   .then(data => {
-    // console.log(data);
-    res.render('editstudent', {data : data});
+    res.render('editstudent', {
+      pagetitle : 'Edit Students',
+      data : data,
+      currentUser : {user : req.session.user || null, role : req.session.role || null}
+    });
   });
 });
 
@@ -40,9 +56,12 @@ router.post('/edit/:id', (req, res) => {
 });
 
 
-// add
+// add student
 router.get('/addstudent', (req, res) => {
-  res.render('addstudent');
+  res.render('addstudent', {
+    pagetitle : 'Add Student',
+    currentUser : {user : req.session.user || null, role : req.session.role || null}
+  });
 });
 
 router.post('/addstudent', (req, res) => {
@@ -61,21 +80,53 @@ router.post('/addstudent', (req, res) => {
     res.redirect('/students');
   })
   .catch(err => {
-    console.log(err);
     res.render('addstudent', {err : err});
   })
 });
 
-// delete
+// delete student
 router.get('/delete/:id', (req, res) => {
   model.Student.destroy({
     where: {
-      id : `${req.params.id}`
+      id : req.params.id
     }
   })
   .then(() => {
-    res.redirect('/students');
+    model.StudentSubject.destroy({
+      where : {
+        StudentId : req.params.id
+      }
+    })
+    .then(() => {
+      res.redirect('/students');
+    });
   });
 });
+
+// add subject to students
+router.get('/addsubject/:id', (req, res) => {
+  model.Student.findById(req.params.id)
+  .then(student_data => {
+    model.Subject.findAll()
+    .then(subject_list => {
+      res.render('addstudentsubject', {
+        pagetitle : 'Add Subject to Student',
+        student_data : student_data,
+        subject_list : subject_list,
+        currentUser : {user : req.session.user || null, role : req.session.role || null}
+      });
+    });
+  });
+});
+
+router.post('/addsubject/:id', (req, res) => {
+  model.StudentSubject.create({
+    StudentId : req.params.id,
+    SubjectId : req.body.SubjectId
+  })
+  .then(() => {
+    res.redirect('/students')
+  })
+})
 
 module.exports = router;

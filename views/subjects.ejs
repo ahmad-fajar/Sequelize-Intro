@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Subjects</title>
+    <%- include ./partials/head %>
   </head>
   <body>
+    <header>
+      <%- include ./partials/header %>
+    </header>
+
     <h1>Subjects</h1>
 
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Subject</th>
-      </tr>
+    <div class="container">
+        <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Subject</th>
+            <th class="text-center">Assigned Teacher</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
 
-    <% data.forEach(list => { %>
-      <tr>
-        <td><%= list.id %></td>
-        <td><%= list.subject_name %></td>
-      </tr>
-    <% }); %>
+        <% var i = 1 %>
+        <% data.forEach(list => { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= list.subject_name %></td>
+            <td>
+              <ol>
+                <% list.Teachers.forEach(teacher => { %>
+                <li><%= teacher.first_name + ' ' + teacher.last_name %></li>
+                <% }) %>
+              </ol>
+            </td>
 
-    </table>
+            <td class="text-center"><a href="/subjects/<%= list.id %>/enrolledstudents" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-th-list"></span> Enrolled Students</a></td>
+          </tr>
+        <% }); %>
+
+        </table>
+        </div>
+    </div>
+
+
+
 
   </body>
 </html>

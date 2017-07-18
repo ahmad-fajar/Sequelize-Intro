@@ -21,6 +21,14 @@ module.exports = {
       subject_name: 'Ekonomi',
       createdAt: new Date(),
       updatedAt: new Date()
+      }, {
+      subject_name: 'Sejarah',
+      createdAt: new Date(),
+      updatedAt: new Date()
+      }, {
+      subject_name: 'Geografi',
+      createdAt: new Date(),
+      updatedAt: new Date()
       }
     ], {});
   },

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./partials/head %>
+  </head>
+  <body>
+    <header>
+      <%- include ./partials/header %>
+    </header>
+
+    <h2>Give to <%= data.Student.first_name + ' ' + data.Student.last_name %></h2>
+    <br>
+
+  <!-- <form class="" action="/subjects/<%= data.id %>/givescore" method="post"> -->
+  <form class="" action="/subjects/<%= data.Subject.id %>/<%= data.id %>/givescore" method="post">
+    <table>
+      <tr>
+        <td>Student's Name</td>
+        <td>:</td>
+        <td><%= data.Student.first_name + ' ' + data.Student.last_name %></td>
+      </tr>
+      <tr>
+        <td>Subject</td>
+        <td>:</td>
+        <td><%= data.Subject.subject_name %></td>
+      </tr>
+      <tr>
+        <td>Score</td>
+        <td>:</td>
+        <td>
+            <input type="text" name="score" value="" placeholder="Input score">
+        </td>
+      </tr>
+    </table>
+    <button type="submit">Submit</button>
+  </form>
+
+
+  </body>
+</html>

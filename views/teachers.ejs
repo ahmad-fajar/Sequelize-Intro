@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Teachers</title>
+    <%- include ./partials/head %>
   </head>
   <body>
+    <header>
+      <%- include ./partials/header %>
+    </header>
+
     <h1>Teachers</h1>
-    <%= data[0].first_name %>
 
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-      </tr>
+    <div class="container">
+        <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+        <thead>
+        <a href="/teachers/addteacher" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new teacher</a>
+          <tr>
+            <th>No.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th class="text-center" colspan="2">Options</th>
+          </tr>
+        </thead>
 
-    <% data.forEach(list => { %>
-      <tr>
-        <td><%= list.id %></td>
-        <td><%= list.first_name %></td>
-        <td><%= list.last_name %></td>
-        <td><%= list.email %></td>
-      </tr>
-    <% }); %>
+        <% var i = 1 %>
+        <% data.forEach(list => { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= list.first_name %></td>
+            <td><%= list.last_name %></td>
+            <td><%= list.email %></td>
+            <% if (list.SubjectId == undefined) { %>
+              <td>unassigned</td>
+            <% } else { %>
+              <td><%= list.Subject.subject_name %></td>
+            <% } %>
+            <td class="text-center"><a class='btn btn-info btn-xs' href="/teachers/edit/<%= list.id %>"><span class="glyphicon glyphicon-edit"></span> Edit</a> </td>
+            <td class="text-center"><a href="/teachers/delete/<%= list.id %>" onclick="return confirm('Are you sure want to delete <%= list.first_name %> <%= list.last_name %>')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+          </tr>
+        <% }); %>
 
-    </table>
+        </table>
+        </div>
+    </div>
 
   </body>
 </html>

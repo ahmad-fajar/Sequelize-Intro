@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./partials/head %>
+  </head>
+  <body>
+    <header>
+      <%- include ./partials/header %>
+    </header>
+
+    <h2>Edit <%= teacher_data.first_name %> <%= teacher_data.last_name %>'s data.</h2>
+    <br>
+
+    <form class="" action="/teachers/edit/<%= teacher_data.id %>" method="post">
+      <input type="text" name="first_name" value="<%= teacher_data.first_name %>">
+      <br>
+      <input type="text" name="last_name" value="<%= teacher_data.last_name %>">
+      <br>
+      <input type="text" name="email" value="<%= teacher_data.email %>">
+      <br>
+      <input type="text" value="<%= teacher_data.SubjectId %>">
+      <br>
+      <select class="" name="SubjectId">
+        <% if (teacher_data.SubjectId == undefined) { %>
+          <option> Unassigned </option>
+          <% subject_data.forEach(subject => { %>
+            <option value="<%= subject.id %>"> <%= subject.subject_name %> </option>
+          <% }) %>
+        <% } else { %>
+          <option selected="<%= teacher_data.SubjectId %>"> <%= teacher_data.Subject.subject_name %> </option>
+          <% subject_data.forEach(subject2 => { %>
+            <option value="<%= subject2.id %>"> <%= subject2.subject_name %> </option>
+          <% }) %>
+        <% } %>
+
+
+      </select>
+      <br>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+
+    </form>
+  </body>
+</html>
