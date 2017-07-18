@@ -5,7 +5,7 @@ let keygen = () => {
     let rand = Math.ceil(Math.random() * 3);
     let rand2 = Math.ceil(Math.random()*26);
 
-    if (rand == 1) key += Math.floor(Math.random()*6) + 1;
+    if (rand == 1) key += Math.floor(Math.random()*10);
     else if (rand == 2) key += String.fromCharCode(64 + rand2);
     else key += String.fromCharCode(96 + rand2)
   }
@@ -13,7 +13,6 @@ let keygen = () => {
   return key;
 };
 
-
 module.exports = keygen;
 console.log(keygen());
-// console.log(Math.floor(Math.random() * 3));
+// console.log(Math.floor(Math.random()*10));

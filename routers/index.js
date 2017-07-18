@@ -37,9 +37,18 @@ router.get('/logout', (req, res, next) => {
   // res.send('logged out')
 })
 
-
+// sign up
 router.get('/signup', (req, res, next) => {
   res.render('signup', {pagetitle : 'Home', currentUser : {user : req.session.user || null, role : req.session.role || null}});
+})
+
+router.post('/signup', (req, res, next) => {
+  // res.send('signup page')
+  model.User.create(req.body)
+  // console.log(req.body)
+  .then(() => {
+    res.redirect('/')
+  })
 })
 
 module.exports = router;
